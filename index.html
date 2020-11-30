@@ -9,7 +9,14 @@
 <body>
     <h1>Stop Watch</h1>
     
-
+    <div class="timeScreen">
+        <p id="timeReadOut">HH:MM:SS:MS</p>
+    </div>
+    <div class="btnControl">
+        <input type="button" value="Start" onclick="startTime()">
+        <input type="button" value="Pause" onclick="pauseTime()">
+        <input type="button" value="Reset" onclick="resetTime()">
+    </div>
 
     <script src="app.js"></script>
 </body>
