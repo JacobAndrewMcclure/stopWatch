@@ -1,28 +1,75 @@
-let originalTime = new Date(0);
-countTime = originalTime.setTime(0);
-let countMillis = originalTime.setMilliseconds(0);
-let countSeconds = originalTime.setSeconds(0);
-let countMinutes = originalTime.setMinutes(0);
-let countHours = originalTime.setHours(17);
+let countMillis = 0;
+let countSeconds = 0;
+let countMinutes = 0;
+let countHours = 0;
 
-let timeControl;
+let displayTime;
+
+let milliControl;
+let secondControl;
+let minuteControl;
+let hourControl;
 
 let testTime = 0;
 
 let timerOn = false;
 
 function startTime() {
-    timeControl = setInterval(addTime, 10);
+    milliControl = setInterval(addMillis, 1000 / 100);
+    secondControl = setInterval(addSeconds, 1000);
+    minuteControl = setInterval(addMinutes, 1000 * 60);
+    hourControl = setInterval(addHours, 1000 * 3600)
 }
 function pauseTime() {
-    clearInterval(timeControl);
+    clearInterval(milliControl);
+    clearInterval(secondControl);
+    clearInterval(displayTime);
 }
 function resetTime() {
-    clearInterval(timeControl);
-    testTime = 0;
-    document.getElementById("timeReadOut").innerHTML = testTime;
+    clearInterval(milliControl);
+    clearInterval(secondControl);
+    clearInterval(displayTime);
+    clearInterval(hourControl);
+    
+    countMillis = 0;
+    countSeconds = 0;
+    countMinutes = 0;
+    countHours = 0;
+    
+    document.getElementById("milliDisplay").innerHTML = countMillis + "0";
+    document.getElementById("secDisplay").innerHTML = countSeconds + "0:";
+    document.getElementById("minDisplay").innerHTML = countMinutes + "0:";
+    document.getElementById("hourDisplay").innerHTML = countHours + "0:";
 }
-function addTime() {
-    testTime++;
-    document.getElementById("timeReadOut").innerHTML = testTime;
+
+function addMillis() {
+    if (countMillis >= 99) {
+        countMillis = 0;
+        document.getElementById("milliDisplay").innerHTML = countMillis;
+    } else {
+        countMillis++;
+        document.getElementById("milliDisplay").innerHTML = countMillis;
+    }
+}
+function addSeconds() {
+    if (countSeconds >= 59) {
+        countSeconds = 0;
+        document.getElementById("secDisplay").innerHTML = countSeconds + ":";
+    } else {
+        countSeconds++;
+        document.getElementById("secDisplay").innerHTML = countSeconds + ":";
+    }
+}
+function addMinutes() {
+    if (countMinutes >= 59) {
+        countMinutes = 0;
+        document.getElementById("minDisplay").innerHTML = countMinutes + ":";
+    } else {
+        countMinutes++;
+        document.getElementById("minDisplay").innerHTML = countMinutes + ":";
+    }
+}
+function addHours() {
+    countHours++;
+    document.getElementById("hourDisplay").innerHTML = countHours + ":";
 }
