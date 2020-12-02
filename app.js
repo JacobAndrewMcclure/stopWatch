@@ -2,74 +2,77 @@ let countMillis = 0;
 let countSeconds = 0;
 let countMinutes = 0;
 let countHours = 0;
-
-let displayTime;
-
+//variable for interval function
 let milliControl;
-let secondControl;
-let minuteControl;
-let hourControl;
-
-let testTime = 0;
-
+//variable for if time is running or not
 let timerOn = false;
 
+//runs function if start button is pushed
 function startTime() {
-    milliControl = setInterval(addMillis, 1000 / 100);
-    secondControl = setInterval(addSeconds, 1000);
-    minuteControl = setInterval(addMinutes, 1000 * 60);
-    hourControl = setInterval(addHours, 1000 * 3600)
+    //Runs function every 0.01 seconds if timer is on
+    if (timerOn == false) {
+        milliControl = setInterval(addMillis, 10);
+        timerOn = true;
+    //does nothing if timer is already on
+    } else {
+
+    }
 }
+//pauses stop watch
 function pauseTime() {
     clearInterval(milliControl);
-    clearInterval(secondControl);
-    clearInterval(displayTime);
+    timerOn = false;
 }
+//resets time
 function resetTime() {
     clearInterval(milliControl);
-    clearInterval(secondControl);
-    clearInterval(displayTime);
-    clearInterval(hourControl);
+    timerOn = false;
     
     countMillis = 0;
     countSeconds = 0;
     countMinutes = 0;
     countHours = 0;
-    
-    document.getElementById("milliDisplay").innerHTML = countMillis + "0";
-    document.getElementById("secDisplay").innerHTML = countSeconds + "0:";
-    document.getElementById("minDisplay").innerHTML = countMinutes + "0:";
-    document.getElementById("hourDisplay").innerHTML = countHours + "0:";
+
+    document.getElementById("milliDisplay").innerHTML = "0" + countMillis;
+    document.getElementById("secDisplay").innerHTML = "0" + countSeconds + ":";
+    document.getElementById("minDisplay").innerHTML = "0" + countMinutes + ":";
+    document.getElementById("hourDisplay").innerHTML = countHours + ":";
 }
 
 function addMillis() {
+    //function increments seconds
     if (countMillis >= 99) {
         countMillis = 0;
-        document.getElementById("milliDisplay").innerHTML = countMillis;
+        countSeconds++;
+        document.getElementById("milliDisplay").innerHTML = "0" + countMillis;
+    } else if (countMillis <= 8) {
+        countMillis++;
+        document.getElementById("milliDisplay").innerHTML = "0" + countMillis;
     } else {
         countMillis++;
         document.getElementById("milliDisplay").innerHTML = countMillis;
     }
-}
-function addSeconds() {
-    if (countSeconds >= 59) {
+    //increments minutes based on seconds
+    if (countSeconds >= 60) {
         countSeconds = 0;
-        document.getElementById("secDisplay").innerHTML = countSeconds + ":";
-    } else {
-        countSeconds++;
-        document.getElementById("secDisplay").innerHTML = countSeconds + ":";
-    }
-}
-function addMinutes() {
-    if (countMinutes >= 59) {
-        countMinutes = 0;
-        document.getElementById("minDisplay").innerHTML = countMinutes + ":";
-    } else {
         countMinutes++;
-        document.getElementById("minDisplay").innerHTML = countMinutes + ":";
+        document.getElementById("secDisplay").innerHTML = "0" + countSeconds + ":";
+    } else if (countSeconds <= 9) {
+        document.getElementById("secDisplay").innerHTML = "0" + countSeconds + ":";
+    } else {
+        document.getElementById("secDisplay").innerHTML = countSeconds + ":";
     }
-}
-function addHours() {
-    countHours++;
-    document.getElementById("hourDisplay").innerHTML = countHours + ":";
+    //increaments hours based on minutes
+    if (countMinutes >= 60) {
+        countMinutes = 0;
+        countHours++;
+        document.getElementById("minDisplay").innerHTML = "0" + countMinutes + ":";
+        document.getElementById("hourDisplay").innerHTML = countHours + ":";
+    } else if (countMinutes <= 9) {
+        document.getElementById("minDisplay").innerHTML = "0" + countMinutes + ":";
+        document.getElementById("hourDisplay").innerHTML = countHours + ":";
+    } else {
+        document.getElementById("minDisplay").innerHTML = countMinutes + ":";
+        document.getElementById("hourDisplay").innerHTML = countHours + ":";
+    }
 }
