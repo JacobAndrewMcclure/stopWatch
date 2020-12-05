@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=VT323&family=Xanh+Mono&display=swap" rel="stylesheet">
     <title>Stop Watch</title>
 </head>
 <body>
     <h1>Stop Watch</h1>
     
     <div class="timeScreen">
-        <p id="timeReadOut"><span id="hourDisplay">HH:</span><span id="minDisplay">MM:</span>
-            <span id="secDisplay">SS:</span><span id="milliDisplay">MS</span></p>
+        <p id="timeReadOut"><span id="hourDisplay">h:</span><span id="minDisplay">mm:</span><span 
+            id="secDisplay">ss:</span><span id="milliDisplay">ms</span></p>
     </div>
     <div class="btnControl">
         <input type="button" value="Start" id="btnSelect" onclick="startTime()">
         <input type="button" value="Pause" id="btnSelect" onclick="pauseTime()">
         <input type="button" value="Reset" id="btnSelect" onclick="resetTime()">
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>

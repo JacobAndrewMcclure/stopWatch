@@ -1,3 +1,4 @@
+//variables for hours, min, sec & milliseconds
 let countMillis = 0;
 let countSeconds = 0;
 let countMinutes = 0;
@@ -23,16 +24,18 @@ function pauseTime() {
     clearInterval(milliControl);
     timerOn = false;
 }
+
 //resets time
 function resetTime() {
+    //stops milli interval so clock doesn't count
     clearInterval(milliControl);
     timerOn = false;
-    
+    //reset variables
     countMillis = 0;
     countSeconds = 0;
     countMinutes = 0;
     countHours = 0;
-
+    //updates time to display 0
     document.getElementById("milliDisplay").innerHTML = "0" + countMillis;
     document.getElementById("secDisplay").innerHTML = "0" + countSeconds + ":";
     document.getElementById("minDisplay").innerHTML = "0" + countMinutes + ":";
